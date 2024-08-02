@@ -80,15 +80,15 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 }
 
 async function deleteUserAndRelatedData(userId: number) {
-	const deletePosts = prisma?.post.deleteMany({
+	const deletePosts: any = prisma?.post.deleteMany({
 		where: { authorId: userId },
 	})
 
-	const deleteProfile = prisma?.profile.delete({
+	const deleteProfile: any = prisma?.profile.delete({
 		where: { userId },
 	})
 
-	const deleteUser = prisma?.user.delete({
+	const deleteUser: any = prisma?.user.delete({
 		where: { id: userId },
 	})
 

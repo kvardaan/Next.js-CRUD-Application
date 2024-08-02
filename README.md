@@ -1,3 +1,3 @@
 Next.js CRUD Application - For a Blogging Application
 
-Testing CI
+Testing Continuous Integration

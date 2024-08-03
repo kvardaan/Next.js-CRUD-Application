@@ -29,3 +29,15 @@ jobs:
 
       - name: Verify Pushed Image
         run: docker pull vardaankhattar/next.js-crud-application:latest
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo docker pull vardaankhattar/next.js-crud-application:latest
+            sudo docker stop next.js-crud-application || true
+            sudo docker rm next.js-crud-application || true
+            sudo docker run -d --name next.js-crud-application -p 3005:3000 vardaankhattar/next.js-crud-application:latest

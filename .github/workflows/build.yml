@@ -1,4 +1,4 @@
-name: Build on PR
+name: Continuous Integration - Build on PR
 
 on:
   pull_request:
@@ -8,17 +8,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js
+
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Generate prisma client
+      - name: Generate Prisma client
         run: npm run db:generate
 
       - name: Run Build

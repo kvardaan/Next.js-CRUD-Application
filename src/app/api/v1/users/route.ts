@@ -1,6 +1,6 @@
+import bcrypt from 'bcryptjs'
 import prisma from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
-import bcrypt from 'bcrypt'
 import { NextRequest, NextResponse } from 'next/server'
 
 // GET /api/v1/users - get all the users

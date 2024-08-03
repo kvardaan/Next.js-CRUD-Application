@@ -40,4 +40,16 @@ jobs:
             sudo docker pull vardaankhattar/next.js-crud-application:latest
             sudo docker stop next.js-crud-application || true
             sudo docker rm next.js-crud-application || true
-            sudo docker run -d --name next.js-crud-application -p 3005:3000 vardaankhattar/next.js-crud-application:latest
+
+            # Run database migrations
+            sudo docker run --rm \
+              -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+              vardaankhattar/next.js-crud-application:latest \
+              npx prisma migrate deploy
+
+            # Run the application
+            sudo docker run --restart unless-stopped -d \
+              --name next.js-crud-application \
+              -p 3005:3000 \
+              -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+              vardaankhattar/next.js-crud-application:latest
